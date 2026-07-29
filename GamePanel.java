@@ -11,14 +11,10 @@ public class GamePanel extends JPanel {
     private static final int PANEL_HEIGHT = 600;
     private static final int FPS = 60;
 
-    private int paddleX = 350;
-    private int paddleY = 550;
-    private int paddleWidth = 100;
-    private int paddleHeight = 15;
-    private int paddleSpeed = 10;
-
     private boolean movingLeft = false;
     private boolean movingRight = false;
+
+    private Paddle paddle;
 
     private Ball ball;
 
@@ -28,6 +24,7 @@ public class GamePanel extends JPanel {
         this.setFocusable(true);
 
         ball = new Ball(PANEL_WIDTH / 2.0, PANEL_HEIGHT / 2.5, 5);
+        paddle = new Paddle(350, 550);
 
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -51,12 +48,14 @@ public class GamePanel extends JPanel {
     }
 
     private void update() {
-        if (movingLeft) paddleX -= paddleSpeed;
-        if (movingRight) paddleX += paddleSpeed;
-        if (paddleX < 0) paddleX = 0;
-        if (paddleX + paddleWidth > PANEL_WIDTH) paddleX = PANEL_WIDTH - paddleWidth;
+        if(movingLeft) paddle.moveLeft();
+        if(movingRight) paddle.moveRight();
+        paddle.keepInBounds(PANEL_WIDTH);
 
         ball.update();
+        if(ball.getBounds().intersects(paddle.getBounds())) {
+            ball.reverseY();
+        }
 
         // bounce off left/right walls
         if (ball.getX() <= 0 || ball.getX() + ball.getDiameter() >= PANEL_WIDTH) {
@@ -71,8 +70,7 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.white);
-        g.fillRect(paddleX, paddleY, paddleWidth, paddleHeight);
+        paddle.draw(g);
         ball.draw(g);
     }
 }

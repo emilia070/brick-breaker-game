@@ -11,7 +11,7 @@ public class Ball {
         this.x = x;
         this.y = y;
         this.dx = speed;
-        this.dy -= speed;
+        this.dy = -speed;
     }
 
     public void update()
