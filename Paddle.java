@@ -23,22 +23,19 @@ public class Paddle {
     }
 
     public void keepInBounds(int panelWidth) {
-        if(x < 0)
-           x = 0;
+        if (x < 0)
+            x = 0;
 
-        if(x + width > panelWidth)
+        if (x + width > panelWidth)
             x = panelWidth - width;
     }
-    
+
     public void draw(Graphics g) {
         g.setColor(Color.white);
         g.fillRect(x, y, width, height);
     }
 
-    public Rectangle getBounds(){
+    public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
-
- 
-    
 }

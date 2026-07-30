@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
-public class GameFrame extends JFrame{
-    public GameFrame(){
+public class GameFrame extends JFrame {
+    public GameFrame() {
         GamePanel panel = new GamePanel();
         this.add(panel);
 
@@ -10,6 +10,7 @@ public class GameFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        panel.requestFocusInWindow();
     }
-
 }

@@ -14,8 +14,7 @@ public class Ball {
         this.dy = -speed;
     }
 
-    public void update()
-    {
+    public void update() {
         x += dx;
         y += dy;
     }
@@ -37,4 +36,11 @@ public class Ball {
     public void setX(double x) { this.x = x; }
     public void setY(double y) { this.y = y; }
     public int getDiameter() { return diameter; }
+
+    public void reset(double x, double y, double speed) {
+        this.x = x;
+        this.y = y;
+        this.dx = speed;
+        this.dy = -speed;
+    }
 }
